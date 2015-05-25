@@ -15,13 +15,28 @@ peer.on('open', function (id) {
   document.getElementById('your-id').innerHTML = '<h4>Your id is: ' + id + '</h4>';
 });
 
-setNameButton.addEventListener('click', function (name) {
-  name = document.getElementById('name-input').value;
+setNameButton.addEventListener('click', function (evt) {
+  var nameSource = document.getElementById('name-input');
+  name = nameSource.value;
+  nameSource.classList.add('hidden');
+  evt.target.classList.add('hidden');
   document.getElementById('my-name').innerHTML = name;
 });
 
 joinHostButton.addEventListener('click', function () {
   landline = peer.connect(document.getElementById('friends-peer-id').value);
+});
+
+sendMessageButton.addEventListener('click', function (evt) {
+  console.log('you clicked');
+  console.log(name, landline);
+  evt.preventDefault();
+  var data = {
+    'message': document.getElementById('message').value,
+    'name': name
+  };
+  landline.send(data);
+  renderMessage(data);
 });
 
 peer.on('connection', function (landline, name) {
@@ -32,12 +47,6 @@ peer.on('connection', function (landline, name) {
     landline.on('data', function (data) {
       console.log(data);
       renderMessage(data);
-    });
-
-    sendMessageButton.addEventListener('click', function () {
-      landline.send({
-        message: document.getElementById('message').value
-      });
     });
   });
 });
