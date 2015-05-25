@@ -4,8 +4,11 @@ html
       | playing with peer-js-demo
     script(src="http://cdn.peerjs.com/0.3/peer.min.js")
   body
-    h1
-      | here we go
+    h1#my-name
+      | Enter Your Name
+    input(type="text", id="name-input")
+    button(id="set-name", type="button")
+      | Set Name
     #host
       #your-id
         h4

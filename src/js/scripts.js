@@ -3,31 +3,44 @@
 
 let peer = new Peer({key: 'n0ei2j1souk57b9'}),
     joinHostButton = document.getElementById('join-host'),
+    sendMessageButton = document.getElementById('send-message'),
+    setNameButton = document.getElementById('set-name'),
+    chatOutputEl = document.getElementById('chat-history'),
     landline,
-    chatOutputEl = document.getElementById('chat-history');
+    name;
 
 peer.on('open', function(id) {
-  console.log(`My peer ID is: ${id}`);
+  document.getElementById('your-id').innerHTML = `<h4>Your id is: ${id}</h4>`;
+});
+
+setNameButton.addEventListener('click', function (name) {
+  name = document.getElementById('name-input').value;
+  document.getElementById('my-name').innerHTML = name;
 });
 
 joinHostButton.addEventListener('click', function(){
   landline = peer.connect(document.getElementById('friends-peer-id').value);
-  console.log(landline.id);
 });
 
-peer.on('connection', function(landline){
-  window.landline = peer.connect(landline.peer);
+peer.on('connection', function(landline, name){
+  console.log("Ready");
+
   landline.on('open', function(){
-    console.log(landline);
 
     landline.on('data', function(data){
       console.log(data);
       renderMessage(data);
     });
 
-    landline.send("We're friends, right? Facebook BFF's!");
+    sendMessageButton.addEventListener('click', function(evt){
+      evt.preventDefault();
+      landline.send({
+        message: document.getElementById('message').value
+      });
+    });
 
   });
+
 });
 
 function renderMessage(data){
