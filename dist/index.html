@@ -1,11 +1,24 @@
 
 <html>
   <head>
-    <title>playing with peer-js-demo</title>
+    <title>
+       
+      playing with peer-js-demo
+    </title>
     <script src="http://cdn.peerjs.com/0.3/peer.min.js"></script>
   </head>
   <body>
     <h1>here we go</h1>
+    <div id="host">
+      <div class="your-id"></div>
+    </div>
+    <div id="join">
+      <form>
+        <label for="id">Friends ID:</label>
+        <input id="friends-peer-id" name="id" type="text"/>
+        <button id="join-host" type="button">join</button>
+      </form>
+    </div>
     <script src="js/scripts.js"></script>
   </body>
 </html>

@@ -1,9 +1,18 @@
 html
   head
-    title
+    title 
       | playing with peer-js-demo
     script(src="http://cdn.peerjs.com/0.3/peer.min.js")
   body
     h1
       | here we go
+    #host
+      .your-id
+    #join
+      form
+        label(for="id")
+          | Friends ID:
+        input(id="friends-peer-id", name="id", type="text")
+        button(id="join-host", type="button")
+          | join
     script(src="js/scripts.js")
