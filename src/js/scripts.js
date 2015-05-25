@@ -22,7 +22,7 @@ joinHostButton.addEventListener('click', function(){
   landline = peer.connect(document.getElementById('friends-peer-id').value);
 });
 
-sendMessageButton.addEventListener('click', function(evt, name){
+sendMessageButton.addEventListener('click', function(evt){
   console.log('you clicked');
   console.log(name, landline);
   evt.preventDefault();
