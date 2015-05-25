@@ -23,8 +23,8 @@ joinHostButton.addEventListener('click', function(){
 });
 
 peer.on('connection', function(landline, name){
-  console.log("Ready");
-
+  console.log(landline, 'yo');
+  connectBack(landline.peer);
   landline.on('open', function(){
 
     landline.on('data', function(data){
@@ -44,5 +44,17 @@ peer.on('connection', function(landline, name){
 });
 
 function renderMessage(data){
-  chatOutputEl.innerHTML += `<p class="chat">data</p>`;
+  chatOutputEl.innerHTML += `
+    <p class="chat">
+      <span class="name">${data.name}:</span>
+      <span class="message"> ${data.message}</span>
+    </p>`;
+}
+
+function connectBack(id) {
+  if (typeof landline === 'undefined') {
+    // we need to connect back;
+    landline = peer.connect(id);
+    console.log('connecting again');
+  }
 }
