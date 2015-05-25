@@ -8,16 +8,31 @@ var peer = new Peer({ key: 'n0ei2j1souk57b9' }),
     sendMessageButton = document.getElementById('send-message'),
     setNameButton = document.getElementById('set-name'),
     chatOutputEl = document.getElementById('chat-history'),
+    showHostButton = document.getElementById('show-host'),
+    showJoinButton = document.getElementById('show-join'),
     landline = undefined,
     name = undefined;
 
 peer.on('open', function (id) {
-  document.getElementById('your-id').innerHTML = '<h4>Your id is: ' + id + '</h4>';
+  document.getElementById('your-id').innerHTML = '<span>Your id is: ' + id + '</span>';
 });
 
 setNameButton.addEventListener('click', function () {
-  name = document.getElementById('name-input').value;
-  document.getElementById('my-name').innerHTML = name;
+  var nameInput = document.getElementById('name-input');
+  name = nameInput.value;
+  nameInput.classList.add('hide');
+  setNameButton.classList.add('hide');
+  showHostButton.classList.remove('hide');
+  showJoinButton.classList.remove('hide');
+  // document.getElementById('my-name').innerHTML = name;
+});
+
+showHostButton.addEventListener('click', function () {
+  document.getElementById('host').classList.remove('hide');
+});
+
+showJoinButton.addEventListener('click', function () {
+  document.getElementById('join').classList.remove('hide');
 });
 
 joinHostButton.addEventListener('click', function () {
@@ -33,7 +48,7 @@ sendMessageButton.addEventListener('click', function (evt) {
     'name': name
   };
   landline.send(data);
-  renderMessage(data);
+  renderMessage(data, 'me');
 });
 
 peer.on('connection', function (landline, name) {
@@ -43,13 +58,13 @@ peer.on('connection', function (landline, name) {
 
     landline.on('data', function (data) {
       console.log(data);
-      renderMessage(data);
+      renderMessage(data, 'them');
     });
   });
 });
 
-function renderMessage(data) {
-  chatOutputEl.innerHTML += '\n    <p class="chat">\n      <span class="name">' + data.name + ':</span>\n      <span class="message"> ' + data.message + '</span>\n    </p>';
+function renderMessage(data, who) {
+  chatOutputEl.innerHTML += '\n    <div class="chat message-wrapper ' + who + '">\n      <div class="name circle-wrapper animated bounceIn">' + data.name.charAt(0) + '</div>\n      <div class="message text-wrapper animated fadeIn"> ' + data.message + '</div>\n    </div>';
 }
 
 function connectBack(id) {

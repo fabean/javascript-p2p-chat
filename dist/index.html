@@ -6,29 +6,33 @@
       playing with peer-js-demo
     </title>
     <script src="http://cdn.peerjs.com/0.3/peer.min.js"></script>
+    <link rel="stylesheet" href="https://s3-us-west-2.amazonaws.com/s.cdpn.io/104946/animate.min.css">
     <link rel="stylesheet" href="css/styles.css">
   </head>
   <body>
-    <h1 id="my-name">Enter Your Name</h1>
-    <input type="text" id="name-input">
-    <button id="set-name" type="button">Set Name</button>
-    <div id="host">
-      <div id="your-id">
-        <h4>your id is:</h4>
+    <header class="top">
+      <input type="text" id="name-input" placeholder="Your name">
+      <button id="set-name" type="button">Set Name</button>
+      <button id="show-host" class="hide">Host Chat</button>
+      <div id="host" class="hide">
+        <div id="your-id"><span>your id is:</span></div>
       </div>
-    </div>
-    <div id="join">
-      <form>
-        <label for="id">Friends ID:</label>
-        <input id="friends-peer-id" name="id" type="text">
-        <button id="join-host" type="button">join</button>
-      </form>
-    </div>
-    <div id="chat-history" class="chat-wrapper"></div>
-    <div id="new-chat" class="bottom-bar">
-      <input type="text" id="message">
-      <button id="send-message" type="button">send</button>
-    </div>
+      <button id="show-join" class="hide">Join Chat</button>
+      <div id="join" class="hide">
+        <form>
+          <label for="id">Friends ID:</label>
+          <input id="friends-peer-id" name="id" type="text">
+          <button id="join-host" type="button">join</button>
+        </form>
+      </div>
+    </header>
+    <section class="inner">
+      <div id="chat-history" class="chat-wrapper content"></div>
+    </section>
+    <footer id="new-chat" class="bottom-bar bottom">
+      <input type="text" id="message" class="input">
+      <button id="send-message" type="button" class="send"></button>
+    </footer>
     <script src="js/scripts.js"></script>
   </body>
 </html>

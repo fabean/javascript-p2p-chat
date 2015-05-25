@@ -4,27 +4,31 @@ html
     title 
       | playing with peer-js-demo
     script(src="http://cdn.peerjs.com/0.3/peer.min.js")
+    link(rel='stylesheet', href='https://s3-us-west-2.amazonaws.com/s.cdpn.io/104946/animate.min.css')
     link(rel='stylesheet', href='css/styles.css')
   body
-    h1#my-name
-      | Enter Your Name
-    input(type="text", id="name-input")
-    button(id="set-name", type="button")
-      | Set Name
-    #host
-      #your-id
-        h4
-          | your id is:
-    #join
-      form
-        label(for="id")
-          | Friends ID:
-        input(id="friends-peer-id", name="id", type="text")
-        button(id="join-host", type="button")
-          | join
-    #chat-history.chat-wrapper
-    #new-chat.bottom-bar
-      input(type="text", id="message")
-      button(id="send-message", type="button")
-        | send
+    header.top
+      input(type="text", id="name-input", placeholder="Your name")
+      button(id="set-name", type="button")
+        | Set Name
+      button.hide(id="show-host")
+        | Host Chat
+      #host.hide
+        #your-id
+          span
+            | your id is:
+      button.hide(id="show-join")
+        | Join Chat
+      #join.hide
+        form
+          label(for="id")
+            | Friends ID:
+          input(id="friends-peer-id", name="id", type="text")
+          button(id="join-host", type="button")
+            | join
+    section.inner
+      #chat-history.chat-wrapper.content
+    footer#new-chat.bottom-bar.bottom
+      input.input(type="text", id="message")
+      button.send(id="send-message", type="button")
     script(src="js/scripts.js")
