@@ -43,19 +43,20 @@ module.exports = function (grunt) {
                     }]
             }
         },
+        babel: {
+          options: {
+            sourceMap: true
+          },
+          dist: {
+            'files': { '<%= dist %>/js/scripts.js': '<%= src %>/js/scripts.js' }
+          }
+        },
         jshint: {
             'options': { 'jshintrc': '.jshintrc' },
             'all': [
                 'Gruntfile.js',
                 '<%= src %>/js/**/*.js'
             ]
-        },
-        uglify: {
-            'options': {
-                'preserveComments': 'some',
-                'mangle': false
-            },
-            'dist': { 'files': { '<%= dist %>/js/scripts.js': ['<%= src %>/js/scripts.js'] } }
         },
         watch: {
             'grunt': {
@@ -72,6 +73,10 @@ module.exports = function (grunt) {
                     'autoprefixer'
                 ]
             },
+            'babel': {
+      				'files': '<%= src %>/js/*.js',
+      				'tasks': ['babel']
+      			},
             'jade': {
                 'files': '<%= src %>/**/*.jade',
                 'tasks': ['jade']
@@ -103,6 +108,7 @@ module.exports = function (grunt) {
         'sass',
         'autoprefixer',
         'jshint',
+        'babel',
         'connect',
         'watch'
     ]);
