@@ -7,7 +7,9 @@ html
     h1
       | here we go
     #host
-      .your-id
+      #your-id
+        h4
+          | your id is:
     #join
       form
         label(for="id")
@@ -15,4 +17,9 @@ html
         input(id="friends-peer-id", name="id", type="text")
         button(id="join-host", type="button")
           | join
+    #chat-history
+    #new-chat
+      input(type="text", id="message")
+      button(id="send-message", type="button")
+        | send
     script(src="js/scripts.js")

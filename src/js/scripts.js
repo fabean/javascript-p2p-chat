@@ -3,7 +3,8 @@
 
 let peer = new Peer({key: 'n0ei2j1souk57b9'}),
     joinHostButton = document.getElementById('join-host'),
-    landline;
+    landline,
+    chatOutputEl = document.getElementById('chat-history');
 
 peer.on('open', function(id) {
   console.log(`My peer ID is: ${id}`);
@@ -15,13 +16,20 @@ joinHostButton.addEventListener('click', function(){
 });
 
 peer.on('connection', function(landline){
+  window.landline = peer.connect(landline.peer);
   landline.on('open', function(){
+    console.log(landline);
 
     landline.on('data', function(data){
       console.log(data);
+      renderMessage(data);
     });
 
     landline.send("We're friends, right? Facebook BFF's!");
 
   });
 });
+
+function renderMessage(data){
+  chatOutputEl.innerHTML += `<p class="chat">data</p>`;
+}
