@@ -22,6 +22,8 @@
     "grunt-contrib-watch": "^0.6.1",
     "grunt-sass": "^0.18.1",
     "jshint-stylish": "^1.0.1",
+    "load-grunt-tasks": "^3.2.0",
+    "time-grunt": "^1.2.1",
     "uglifyify": "^3.0.1"
   },
   "dependencies": {}
