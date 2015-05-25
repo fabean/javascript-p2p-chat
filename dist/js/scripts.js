@@ -34,8 +34,7 @@ peer.on('connection', function (landline, name) {
       renderMessage(data);
     });
 
-    sendMessageButton.addEventListener('click', function (evt) {
-      evt.preventDefault();
+    sendMessageButton.addEventListener('click', function () {
       landline.send({
         message: document.getElementById('message').value
       });
