@@ -1,6 +1,6 @@
 # Javascript p2p chat
 
-After a day of playing with Peer.js we successfully created a p2p chat program.
+After a day of playing with [Peer.js](http://peerjs.com/) we successfully created a p2p chat program.
 
 ## To use
 
