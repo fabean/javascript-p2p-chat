@@ -7,29 +7,41 @@ var peer = new Peer({ key: 'n0ei2j1souk57b9' }),
     joinHostButton = document.getElementById('join-host'),
     sendMessageButton = document.getElementById('send-message'),
     setNameButton = document.getElementById('set-name'),
+    nameEl = document.getElementById('name-input'),
     chatOutputEl = document.getElementById('chat-history'),
     showHostButton = document.getElementById('show-host'),
     showJoinButton = document.getElementById('show-join'),
     connectedEl = document.getElementById('connected'),
     messageEl = document.getElementById('message'),
     messageWrapEl = document.getElementsByClassName('message-wrapper'),
+    peerId = document.getElementById('friends-peer-id'),
     landline = undefined,
     name = undefined;
 
-peer.on('open', function (id) {
-  document.getElementById('your-id').innerHTML = '<span>Your id is: <kbd>' + id + '</kbd></span>';
+// set name events / functions
+setNameButton.addEventListener('click', function () {
+  setName();
 });
 
-setNameButton.addEventListener('click', function () {
+nameEl.addEventListener('keydown', function (e) {
+  var key = e.which || e.keyCode;
+  if (key === 13) {
+    // enter key
+    e.preventDefault();
+    setName();
+  }
+});
+
+function setName() {
   var nameInput = document.getElementById('name-input');
   name = nameInput.value;
   nameInput.classList.add('hide');
   setNameButton.classList.add('hide');
   showHostButton.classList.remove('hide');
   showJoinButton.classList.remove('hide');
-  // document.getElementById('my-name').innerHTML = name;
-});
+}
 
+// host / join
 showHostButton.addEventListener('click', function () {
   document.getElementById('host').classList.toggle('hide');
 });
@@ -38,13 +50,37 @@ showJoinButton.addEventListener('click', function () {
   document.getElementById('join').classList.toggle('hide');
 });
 
+peerId.addEventListener('keydown', function (e) {
+  var key = e.which || e.keyCode;
+  if (key === 13) {
+    // enter key
+    e.preventDefault();
+    landline = peer.connect(peerId.value);
+    document.getElementById('join').classList.toggle('hide');
+  }
+});
+
 joinHostButton.addEventListener('click', function () {
-  landline = peer.connect(document.getElementById('friends-peer-id').value);
+  landline = peer.connect(peerId.value);
   document.getElementById('join').classList.toggle('hide');
 });
 
+// messages
 sendMessageButton.addEventListener('click', function (evt) {
   evt.preventDefault();
+  sendMessage();
+});
+
+messageEl.addEventListener('keydown', function (e) {
+  var key = e.which || e.keyCode;
+  if (key === 13) {
+    // enter key
+    e.preventDefault();
+    sendMessage();
+  }
+});
+
+function sendMessage() {
   var data = {
     'message': messageEl.value,
     'name': name
@@ -52,21 +88,10 @@ sendMessageButton.addEventListener('click', function (evt) {
   messageEl.value = '';
   landline.send(data);
   renderMessage(data, 'me');
-});
-
-peer.on('connection', function (landline, name) {
-  connectBack(landline.peer);
-  landline.on('open', function () {
-    renderConnectedTo(landline.peer);
-
-    landline.on('data', function (data) {
-      console.log(data);
-      renderMessage(data, 'them');
-    });
-  });
-});
+}
 
 function renderMessage(data, who) {
+  // building out all the elements and rendering to page
   var messageWrapper = document.createElement('div');
   messageWrapper.classList.add('chat', 'message-wrapper', who);
 
@@ -85,17 +110,11 @@ function renderMessage(data, who) {
   messageWrapper.appendChild(messagePerson);
   messageWrapper.appendChild(messageDiv);
 
-  // let newMessage = document.createTextNode(`
-  //   <div class="chat message-wrapper ${who}">
-  //     <div class="name circle-wrapper animated bounceIn">${(data.name).charAt(0)}</div>
-  //     <div class="message text-wrapper"> ${data.message}</div>
-  //   </div>`);
   chatOutputEl.appendChild(messageWrapper);
 
   if (who === 'them' && document.getElementById('friendID').innerHTML !== data.name) {
     renderConnectedTo(data.name);
   }
-
   animateText();
 }
 
@@ -106,6 +125,23 @@ function animateText() {
   }, 350);
 }
 
+// peer stuff
+peer.on('open', function (id) {
+  document.getElementById('your-id').innerHTML = '<span>Your id is: <kbd>' + id + '</kbd></span>';
+});
+
+peer.on('connection', function (landline, name) {
+  connectBack(landline.peer);
+  landline.on('open', function () {
+    renderConnectedTo(landline.peer);
+
+    landline.on('data', function (data) {
+      console.log(data);
+      renderMessage(data, 'them');
+    });
+  });
+});
+
 function renderConnectedTo(peer) {
   connectedEl.innerHTML = 'You\'re connected to <span id="friendID">' + peer + '</span>';
   connectedEl.classList.remove('hide');
@@ -113,26 +149,11 @@ function renderConnectedTo(peer) {
 }
 
 function connectBack(id) {
+  // recieve a connection and connect back
   if (typeof landline === 'undefined') {
     // we need to connect back;
     landline = peer.connect(id);
     console.log('connecting again');
   }
 }
-
-messageEl.addEventListener('keydown', function (e) {
-  var key = e.which || e.keyCode;
-
-  if (key === 13) {
-    // enter key
-    e.preventDefault();
-    var data = {
-      'message': messageEl.value,
-      'name': name
-    };
-    messageEl.value = '';
-    landline.send(data);
-    renderMessage(data, 'me');
-  }
-});
 //# sourceMappingURL=scripts.js.map
