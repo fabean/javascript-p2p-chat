@@ -8,3 +8,7 @@ After a day of playing with [Peer.js](http://peerjs.com/) we successfully create
 2. Type in your name
 3. Either host or join (if you host give a friend your ID, if you join you'll need someone's ID)
 4. Once connected start chatting away!
+
+## Use working demo
+
+I am hosting a working demo of this on my site, [check it out!](http://joshfabean.com/demos/javascript-p2p-chat)
