@@ -320,5 +320,20 @@ table {
 td, th {
   padding: 0; }
 
+.bottom-bar {
+  position: fixed;
+  bottom: 0;
+  width: 100%; }
+
+.chat-wrapper {
+  height: 80vh;
+  overflow-y: scroll; }
+
+.chat {
+  width: 70%;
+  padding: 5px;
+  border: 1px solid gray;
+  margin: 10px 0; }
+
 .hidden {
   display: none; }

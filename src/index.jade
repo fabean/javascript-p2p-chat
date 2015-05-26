@@ -1,8 +1,10 @@
+doctype html
 html
   head
     title 
       | playing with peer-js-demo
     script(src="http://cdn.peerjs.com/0.3/peer.min.js")
+    link(rel='stylesheet', href='css/styles.css')
   body
     h1#my-name
       | Enter Your Name
@@ -20,8 +22,8 @@ html
         input(id="friends-peer-id", name="id", type="text")
         button(id="join-host", type="button")
           | join
-    #chat-history
-    #new-chat
+    #chat-history.chat-wrapper
+    #new-chat.bottom-bar
       input(type="text", id="message")
       button(id="send-message", type="button")
         | send

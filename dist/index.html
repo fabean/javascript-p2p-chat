@@ -1,4 +1,4 @@
-
+<!DOCTYPE html>
 <html>
   <head>
     <title>
@@ -6,10 +6,11 @@
       playing with peer-js-demo
     </title>
     <script src="http://cdn.peerjs.com/0.3/peer.min.js"></script>
+    <link rel="stylesheet" href="css/styles.css">
   </head>
   <body>
     <h1 id="my-name">Enter Your Name</h1>
-    <input type="text" id="name-input"/>
+    <input type="text" id="name-input">
     <button id="set-name" type="button">Set Name</button>
     <div id="host">
       <div id="your-id">
@@ -19,13 +20,13 @@
     <div id="join">
       <form>
         <label for="id">Friends ID:</label>
-        <input id="friends-peer-id" name="id" type="text"/>
+        <input id="friends-peer-id" name="id" type="text">
         <button id="join-host" type="button">join</button>
       </form>
     </div>
-    <div id="chat-history"></div>
-    <div id="new-chat">
-      <input type="text" id="message"/>
+    <div id="chat-history" class="chat-wrapper"></div>
+    <div id="new-chat" class="bottom-bar">
+      <input type="text" id="message">
       <button id="send-message" type="button">send</button>
     </div>
     <script src="js/scripts.js"></script>
