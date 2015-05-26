@@ -11,6 +11,8 @@ var peer = new Peer({ key: 'n0ei2j1souk57b9' }),
     showHostButton = document.getElementById('show-host'),
     showJoinButton = document.getElementById('show-join'),
     connectedEl = document.getElementById('connected'),
+    messageEl = document.getElementById('message'),
+    messageWrapEl = document.getElementsByClassName('message-wrapper'),
     landline = undefined,
     name = undefined;
 
@@ -43,7 +45,6 @@ joinHostButton.addEventListener('click', function () {
 
 sendMessageButton.addEventListener('click', function (evt) {
   evt.preventDefault();
-  var messageEl = document.getElementById('message');
   var data = {
     'message': messageEl.value,
     'name': name
@@ -66,11 +67,43 @@ peer.on('connection', function (landline, name) {
 });
 
 function renderMessage(data, who) {
-  chatOutputEl.innerHTML += '\n    <div class="chat message-wrapper ' + who + '">\n      <div class="name circle-wrapper animated bounceIn">' + data.name.charAt(0) + '</div>\n      <div class="message text-wrapper animated fadeIn"> ' + data.message + '</div>\n    </div>';
+  var messageWrapper = document.createElement('div');
+  messageWrapper.classList.add('chat', 'message-wrapper', who);
+
+  var messagePerson = document.createElement('div');
+  messagePerson.classList.add('name', 'circle-wrapper', 'animated', 'bounceIn');
+
+  var personName = document.createTextNode(data.name.charAt(0));
+  messagePerson.appendChild(personName);
+
+  var messageDiv = document.createElement('div');
+  messageDiv.classList.add('message', 'text-wrapper');
+
+  var messageContent = document.createTextNode(data.message);
+  messageDiv.appendChild(messageContent);
+
+  messageWrapper.appendChild(messagePerson);
+  messageWrapper.appendChild(messageDiv);
+
+  // let newMessage = document.createTextNode(`
+  //   <div class="chat message-wrapper ${who}">
+  //     <div class="name circle-wrapper animated bounceIn">${(data.name).charAt(0)}</div>
+  //     <div class="message text-wrapper"> ${data.message}</div>
+  //   </div>`);
+  chatOutputEl.appendChild(messageWrapper);
 
   if (who === 'them' && document.getElementById('friendID').innerHTML !== data.name) {
     renderConnectedTo(data.name);
   }
+
+  animateText();
+}
+
+function animateText() {
+  setTimeout(function () {
+    var lastMessage = messageWrapEl[messageWrapEl.length - 1];
+    lastMessage.getElementsByClassName('text-wrapper')[0].classList.add('animated', 'fadeIn');
+  }, 350);
 }
 
 function renderConnectedTo(peer) {
@@ -84,9 +117,22 @@ function connectBack(id) {
     // we need to connect back;
     landline = peer.connect(id);
     console.log('connecting again');
-    // let connectedEl = document.getElementById('connected');
-    // connectedEl.innetHTML = `You're connected to ${id}`;
-    // connectedEl.classList.remove('hide');
   }
 }
+
+messageEl.addEventListener('keydown', function (e) {
+  var key = e.which || e.keyCode;
+
+  if (key === 13) {
+    // enter key
+    e.preventDefault();
+    var data = {
+      'message': messageEl.value,
+      'name': name
+    };
+    messageEl.value = '';
+    landline.send(data);
+    renderMessage(data, 'me');
+  }
+});
 //# sourceMappingURL=scripts.js.map
