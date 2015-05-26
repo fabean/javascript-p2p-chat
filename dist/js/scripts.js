@@ -150,6 +150,7 @@ function renderConnectedTo(peer) {
 
 function connectBack(id) {
   // recieve a connection and connect back
+  console.log(landline);
   if (typeof landline === 'undefined') {
     // we need to connect back;
     landline = peer.connect(id);
