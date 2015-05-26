@@ -1,34 +1,54 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>
-       
-      playing with peer-js-demo
-    </title>
+    <title>WebRTC P2P Chat</title>
     <script src="http://cdn.peerjs.com/0.3/peer.min.js"></script>
+    <link rel="stylesheet" href="https://s3-us-west-2.amazonaws.com/s.cdpn.io/104946/animate.min.css">
     <link rel="stylesheet" href="css/styles.css">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="WebRTC P2P chat">
+    <meta name="author" content="Josh Fabean &amp; Nathan Phelps">
+    <meta name="keywords" content="p2p,chat,webrtc">
+    <meta property="og:title" content="P2P Chat">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="http://joshfabean.com/demos/javascript-p2p-chat/index.html">
+    <meta property="og:description" content="Javascript P2P chat using WebRTC">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:url" content="http://joshfabean.com/demos/javascript-p2p-chat/index.html">
+    <meta name="twitter:title" content="WebRTC P2P Chat">
+    <meta name="twitter:description" content="Javascript P2P chat using WebRTC">
+    <meta name="twitter:site" content="@joshfabean">
+    <meta name="twitter:creator" content="@joshfabean">
   </head>
   <body>
-    <h1 id="my-name">Enter Your Name</h1>
-    <input type="text" id="name-input">
-    <button id="set-name" type="button">Set Name</button>
-    <div id="host">
-      <div id="your-id">
-        <h4>your id is:</h4>
+    <header class="top">
+      <div id="init-wrapper">
+        <input id="name-input" type="text" placeholder="Your name">
+        <button id="set-name" type="button" class="red ghost">Set Name</button>
+        <button id="show-host" class="hide inline-block red ghost">Host Chat</button>
+        <div id="host" class="hide inline-block">
+          <div id="your-id"><span>your id is:</span></div>
+        </div>
+        <button id="show-join" class="hide inline-block red ghost">Join Chat</button>
+        <div id="join" class="hide inline-block">
+          <form>
+            <label for="id">Friends ID:</label>
+            <input id="friends-peer-id" name="id" type="text">
+            <button id="join-host" type="button" class="red ghost">join</button>
+          </form>
+        </div>
       </div>
-    </div>
-    <div id="join">
-      <form>
-        <label for="id">Friends ID:</label>
-        <input id="friends-peer-id" name="id" type="text">
-        <button id="join-host" type="button">join</button>
-      </form>
-    </div>
-    <div id="chat-history" class="chat-wrapper"></div>
-    <div id="new-chat" class="bottom-bar">
-      <input type="text" id="message">
-      <button id="send-message" type="button">send</button>
-    </div>
+      <div id="connected" class="hide"></div>
+    </header>
+    <section class="inner">
+      <div id="chat-history" class="chat-wrapper content"></div>
+    </section>
+    <footer id="new-chat" class="bottom-bar bottom">
+      <textarea id="message" type="text" class="input"></textarea>
+      <button id="send-message" type="button" class="send"></button>
+    </footer>
     <script src="js/scripts.js"></script>
   </body>
 </html>

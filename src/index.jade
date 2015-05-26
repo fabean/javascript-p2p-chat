@@ -1,30 +1,55 @@
 doctype html
 html
   head
-    title 
-      | playing with peer-js-demo
+    title
+      | WebRTC P2P Chat
     script(src="http://cdn.peerjs.com/0.3/peer.min.js")
+    link(rel='stylesheet', href='https://s3-us-west-2.amazonaws.com/s.cdpn.io/104946/animate.min.css')
     link(rel='stylesheet', href='css/styles.css')
+    
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+      
+    meta(name='description', content="WebRTC P2P chat")
+    meta(name='author', content='Josh Fabean & Nathan Phelps')
+    meta(name='keywords', content='p2p,chat,webrtc')
+      
+    meta(property='og:title', content='P2P Chat')
+    meta(property='og:type', content='website')
+    meta(property='og:url', content='http://joshfabean.com/demos/javascript-p2p-chat/index.html')
+    meta(property='og:description', content='Javascript P2P chat using WebRTC')
+    meta(name='twitter:card', content='summary')
+    meta(name='twitter:url', content='http://joshfabean.com/demos/javascript-p2p-chat/index.html')
+    meta(name='twitter:title', content='WebRTC P2P Chat')
+    meta(name='twitter:description', content='Javascript P2P chat using WebRTC')
+    meta(name='twitter:site', content='@joshfabean')
+    meta(name='twitter:creator', content='@joshfabean')
   body
-    h1#my-name
-      | Enter Your Name
-    input(type="text", id="name-input")
-    button(id="set-name", type="button")
-      | Set Name
-    #host
-      #your-id
-        h4
-          | your id is:
-    #join
-      form
-        label(for="id")
-          | Friends ID:
-        input(id="friends-peer-id", name="id", type="text")
-        button(id="join-host", type="button")
-          | join
-    #chat-history.chat-wrapper
-    #new-chat.bottom-bar
-      input(type="text", id="message")
-      button(id="send-message", type="button")
-        | send
+    header.top
+      #init-wrapper
+        input#name-input(type="text", placeholder="Your name")
+        button#set-name.red.ghost(type="button")
+          | Set Name
+        button#show-host.hide.inline-block.red.ghost
+          | Host Chat
+        #host.hide.inline-block
+          #your-id
+            span
+              | your id is:
+        button#show-join.hide.inline-block.red.ghost
+          | Join Chat
+        #join.hide.inline-block
+          form
+            label(for="id")
+              | Friends ID:
+            input#friends-peer-id(name="id", type="text")
+            button#join-host.red.ghost(type="button")
+              | join
+      #connected.hide
+    section.inner
+      #chat-history.chat-wrapper.content
+    footer#new-chat.bottom-bar.bottom
+      textarea#message.input(type="text")
+      button.send(id="send-message", type="button")
     script(src="js/scripts.js")

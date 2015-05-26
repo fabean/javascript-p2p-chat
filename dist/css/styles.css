@@ -320,20 +320,170 @@ table {
 td, th {
   padding: 0; }
 
-.bottom-bar {
+* {
+  box-sizing: border-box; }
+
+body {
+  /* position: relative; */
+  background-color: #f2f2f2; }
+
+.name {
+  text-align: center;
+  padding-top: 11px; }
+
+.top {
+  background: #F44336;
+  padding: 20px;
+  color: #ffffff; }
+
+.hide {
+  display: none !important; }
+
+.bottom {
   position: fixed;
   bottom: 0;
-  width: 100%; }
+  left: 0;
+  right: 0;
+  height: 64px;
+  background: #ffffff;
+  /* box-shadow: 0px -3px 3px 0px rgba(50, 50, 50, 0.1); */ }
+  .bottom .input {
+    height: 64px;
+    background: #ffffff;
+    border: none;
+    width: calc(100% - 64px);
+    position: absolute;
+    left: 0;
+    top: 0;
+    padding: 0 5%;
+    resize: none;
+    overflow: scroll;
+    padding-top: 24px;
+    font-weight: 300;
+    -ms-overflow-style: none;
+    overflow: -moz-scrollbars-none; }
+    .bottom .input:focus {
+      outline: none; }
+    .bottom .input::-webkit-scrollbar {
+      width: 0 !important; }
+  .bottom .send {
+    position: fixed;
+    height: 42.6666666667px;
+    width: 42.6666666667px;
+    border-radius: 50%;
+    border: 0;
+    background: #F44336;
+    color: #ffffff;
+    bottom: 10.6666666667px;
+    right: 10.6666666667px; }
+    .bottom .send:before {
+      content: '';
+      background: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/104946/ic_send_white_48dp.png) no-repeat center center;
+      background-size: 25.6px;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0; }
+    .bottom .send:focus {
+      outline: none; }
+    .bottom .send:hover {
+      cursor: pointer; }
 
-.chat-wrapper {
-  height: 80vh;
-  overflow-y: scroll; }
+.message-wrapper {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  margin: 10.6666666667px 0;
+  padding: 10.6666666667px 0; }
+  .message-wrapper .circle-wrapper {
+    height: 42.6666666667px;
+    width: 42.6666666667px;
+    border-radius: 50%; }
+  .message-wrapper .text-wrapper {
+    padding: 10.6666666667px;
+    min-height: 42.6666666667px;
+    width: 60%;
+    margin: 0 10.6666666667px;
+    box-shadow: 0px 1px 0px 0px rgba(50, 50, 50, 0.3);
+    border-radius: 2px;
+    font-weight: 300;
+    position: relative;
+    /* word-break: break-all; */
+    opacity: 0; }
+    .message-wrapper .text-wrapper:before {
+      content: '';
+      width: 0;
+      height: 0;
+      border-style: solid; }
+  .message-wrapper.them .circle-wrapper, .message-wrapper.them .text-wrapper {
+    background: #F44336;
+    float: left;
+    color: #ffffff; }
+  .message-wrapper.them .text-wrapper:before {
+    border-width: 0 10px 10px 0;
+    border-color: transparent #F44336 transparent transparent;
+    position: absolute;
+    top: 0;
+    left: -9px; }
+  .message-wrapper.me .circle-wrapper, .message-wrapper.me .text-wrapper {
+    background: #FF5722;
+    float: right;
+    color: #333333; }
+  .message-wrapper.me .text-wrapper {
+    background: #ffffff; }
+    .message-wrapper.me .text-wrapper:before {
+      border-width: 10px 10px 0 0;
+      border-color: #ffffff transparent transparent transparent;
+      position: absolute;
+      top: 0;
+      right: -9px; }
 
-.chat {
-  width: 70%;
-  padding: 5px;
-  border: 1px solid gray;
-  margin: 10px 0; }
+.inner {
+  overflow: scroll;
+  height: 520px;
+  padding: 64px 10px 0;
+  background: #f2f2f2;
+  -ms-overflow-style: none;
+  overflow: -moz-scrollbars-none; }
+  .inner::-webkit-scrollbar {
+    width: 0 !important; }
+
+.inline-block {
+  display: inline-block; }
+
+input {
+  color: #999999; }
+
+button {
+  text-decoration: none;
+  color: #ffffff;
+  border-radius: 1px;
+  background-color: #2196F3;
+  border: none;
+  -webkit-box-shadow: 0px 3px 3px 0px rgba(50, 50, 50, 0.1);
+  -moz-box-shadow: 0px 3px 3px 0px rgba(50, 50, 50, 0.1);
+  box-shadow: 0px 3px 3px 0px rgba(50, 50, 50, 0.1);
+  display: inline-block;
+  text-align: center;
+  overflow: hidden;
+  position: relative;
+  box-sizing: border-box; }
+  button:hover {
+    background-color: #0d8aee;
+    -webkit-box-shadow: 0px 5px 3px 0px rgba(50, 50, 50, 0.3);
+    -moz-box-shadow: 0px 5px 3px 0px rgba(50, 50, 50, 0.3);
+    box-shadow: 0px 5px 3px 0px rgba(50, 50, 50, 0.3);
+    cursor: pointer;
+    -webkit-transition: 0.3s ease;
+    transition: 0.3s ease; }
+  button.red {
+    background-color: #ffffff;
+    color: #F44336; }
+    button.red:active, button.red:focus {
+      background-color: #f2f2f2; }
+    button.red:hover {
+      background-color: #f2f2f2; }
 
 .hidden {
   display: none; }
