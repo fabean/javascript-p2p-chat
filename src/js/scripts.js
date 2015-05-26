@@ -8,11 +8,12 @@ let peer = new Peer({key: 'n0ei2j1souk57b9'}),
     chatOutputEl = document.getElementById('chat-history'),
     showHostButton = document.getElementById('show-host'),
     showJoinButton = document.getElementById('show-join'),
+    connectedEl = document.getElementById('connected'),
     landline,
     name;
 
 peer.on('open', function(id) {
-  document.getElementById('your-id').innerHTML = `<span>Your id is: ${id}</span>`;
+  document.getElementById('your-id').innerHTML = `<span>Your id is: <kbd>${id}</kbd></span>`;
 });
 
 setNameButton.addEventListener('click', function () {
@@ -27,33 +28,35 @@ setNameButton.addEventListener('click', function () {
 });
 
 showHostButton.addEventListener('click', function(){
-  document.getElementById('host').classList.remove('hide');
+  document.getElementById('host').classList.toggle('hide');
 });
 
 showJoinButton.addEventListener('click', function(){
-  document.getElementById('join').classList.remove('hide');
+  document.getElementById('join').classList.toggle('hide');
 });
 
 joinHostButton.addEventListener('click', function(){
   landline = peer.connect(document.getElementById('friends-peer-id').value);
+  document.getElementById('join').classList.toggle('hide');
 });
 
 sendMessageButton.addEventListener('click', function(evt){
-  console.log('you clicked');
-  console.log(name, landline);
   evt.preventDefault();
+  let messageEl = document.getElementById('message');
   let data = {
-    "message": document.getElementById('message').value,
+    "message": messageEl.value,
     "name": name
   };
+  messageEl.value = '';
   landline.send(data);
   renderMessage(data, 'me');
+
 });
 
 peer.on('connection', function(landline, name){
-  console.log(landline, 'yo');
   connectBack(landline.peer);
   landline.on('open', function(){
+    renderConnectedTo(landline.peer);
 
     landline.on('data', function(data){
       console.log(data);
@@ -70,6 +73,16 @@ function renderMessage(data, who){
       <div class="name circle-wrapper animated bounceIn">${(data.name).charAt(0)}</div>
       <div class="message text-wrapper animated fadeIn"> ${data.message}</div>
     </div>`;
+
+  if (who === 'them' && document.getElementById('friendID').innerHTML !== data.name) {
+    renderConnectedTo(data.name);
+  }
+}
+
+function renderConnectedTo(peer) {
+  connectedEl.innerHTML = `You're connected to <span id="friendID">${peer}</span>`;
+  connectedEl.classList.remove('hide');
+  document.getElementById('init-wrapper').classList.add('hide');
 }
 
 function connectBack(id) {
@@ -77,5 +90,8 @@ function connectBack(id) {
     // we need to connect back;
     landline = peer.connect(id);
     console.log('connecting again');
+    // let connectedEl = document.getElementById('connected');
+    // connectedEl.innetHTML = `You're connected to ${id}`;
+    // connectedEl.classList.remove('hide');
   }
 }

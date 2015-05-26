@@ -11,26 +11,29 @@
   </head>
   <body>
     <header class="top">
-      <input type="text" id="name-input" placeholder="Your name">
-      <button id="set-name" type="button">Set Name</button>
-      <button id="show-host" class="hide">Host Chat</button>
-      <div id="host" class="hide">
-        <div id="your-id"><span>your id is:</span></div>
+      <div id="init-wrapper">
+        <input id="name-input" type="text" placeholder="Your name">
+        <button id="set-name" type="button" class="red ghost">Set Name</button>
+        <button id="show-host" class="hide inline-block red ghost">Host Chat</button>
+        <div id="host" class="hide inline-block">
+          <div id="your-id"><span>your id is:</span></div>
+        </div>
+        <button id="show-join" class="hide inline-block red ghost">Join Chat</button>
+        <div id="join" class="hide inline-block">
+          <form>
+            <label for="id">Friends ID:</label>
+            <input id="friends-peer-id" name="id" type="text">
+            <button id="join-host" type="button" class="red ghost">join</button>
+          </form>
+        </div>
       </div>
-      <button id="show-join" class="hide">Join Chat</button>
-      <div id="join" class="hide">
-        <form>
-          <label for="id">Friends ID:</label>
-          <input id="friends-peer-id" name="id" type="text">
-          <button id="join-host" type="button">join</button>
-        </form>
-      </div>
+      <div id="connected" class="hide"></div>
     </header>
     <section class="inner">
       <div id="chat-history" class="chat-wrapper content"></div>
     </section>
     <footer id="new-chat" class="bottom-bar bottom">
-      <input type="text" id="message" class="input">
+      <textarea id="message" type="text" class="input"></textarea>
       <button id="send-message" type="button" class="send"></button>
     </footer>
     <script src="js/scripts.js"></script>

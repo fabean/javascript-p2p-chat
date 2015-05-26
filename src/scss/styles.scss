@@ -13,6 +13,15 @@ $nav: 100;
 $navHeight: 64px;
 $trans: 0.3s ease;
 
+$z10:  0px 3px 3px 0px rgba(50, 50, 50, 0.1);
+$z50:  0px 4px 3px 0px rgba(50, 50, 50, 0.2);
+$z100: 0px 5px 3px 0px rgba(50, 50, 50, 0.3);
+$inktrans: 0.2;
+$darkred: #d32f2f;
+$inkred: transparentize(#b71c1c, $inktrans);
+
+$ghost:    transparent;
+
 * {
   box-sizing: border-box;
 }
@@ -28,11 +37,13 @@ body {
 }
 
 .top {
-
+  background: $red;
+  padding: 20px;
+  color: $white;
 }
 
 .hide {
-  display: none;
+  display: none !important;
 }
 
 .bottom {
@@ -188,3 +199,56 @@ body {
       width: 0 !important
     }
   }
+
+.inline-block {
+  display: inline-block;
+}
+
+input {
+  color: #999999;
+}
+button {
+  // height: 50px;
+  // padding: 0 50px;
+  // font-size: 18px;
+  text-decoration: none;
+  color: $white;
+  border-radius: 1px;
+  background-color: $blue;
+  border: none;
+  -webkit-box-shadow: $z10;
+  -moz-box-shadow:    $z10;
+  box-shadow:         $z10;
+  // margin: 25px 0;
+  display: inline-block;
+  // line-height: 50px;
+  text-align: center;
+  overflow: hidden;
+  position: relative;
+  // font-family: 'Roboto', 'Helvetica', 'Arial', 'Sans Serif';
+  box-sizing: border-box;
+
+  &:hover {
+    background-color: darken($blue, 5%);
+    -webkit-box-shadow: $z100;
+    -moz-box-shadow:    $z100;
+    box-shadow:         $z100;
+    cursor: pointer;
+
+    -webkit-transition: $trans;
+    transition: $trans;
+  }
+
+  &.red {
+    background-color: $white;
+    color: $red;
+
+    &:active, &:focus {
+      background-color: darken($white, 5%);
+    }
+
+    &:hover {
+      background-color: darken($white, 5%);
+    }
+  }
+}

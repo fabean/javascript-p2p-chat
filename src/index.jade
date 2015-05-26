@@ -8,27 +8,29 @@ html
     link(rel='stylesheet', href='css/styles.css')
   body
     header.top
-      input(type="text", id="name-input", placeholder="Your name")
-      button(id="set-name", type="button")
-        | Set Name
-      button.hide(id="show-host")
-        | Host Chat
-      #host.hide
-        #your-id
-          span
-            | your id is:
-      button.hide(id="show-join")
-        | Join Chat
-      #join.hide
-        form
-          label(for="id")
-            | Friends ID:
-          input(id="friends-peer-id", name="id", type="text")
-          button(id="join-host", type="button")
-            | join
+      #init-wrapper
+        input#name-input(type="text", placeholder="Your name")
+        button#set-name.red.ghost(type="button")
+          | Set Name
+        button#show-host.hide.inline-block.red.ghost
+          | Host Chat
+        #host.hide.inline-block
+          #your-id
+            span
+              | your id is:
+        button#show-join.hide.inline-block.red.ghost
+          | Join Chat
+        #join.hide.inline-block
+          form
+            label(for="id")
+              | Friends ID:
+            input#friends-peer-id(name="id", type="text")
+            button#join-host.red.ghost(type="button")
+              | join
+      #connected.hide
     section.inner
       #chat-history.chat-wrapper.content
     footer#new-chat.bottom-bar.bottom
-      input.input(type="text", id="message")
+      textarea#message.input(type="text")
       button.send(id="send-message", type="button")
     script(src="js/scripts.js")
